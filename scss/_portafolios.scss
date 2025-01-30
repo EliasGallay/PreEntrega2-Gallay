@@ -1,0 +1,171 @@
+.body-portafolios {
+  font-family: 'Roboto', sans-serif;
+
+  h1 {
+    color: orange;
+  }
+}
+
+
+
+
+.container-proyectos {
+
+  font-family: 'Roboto', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  max-width: 100%;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px 0px;
+  grid-template-areas:
+    "article article2"
+    "article3 article4"
+    "article5 article6"
+    "article7 article8"
+    "article9 article10";
+
+  img {
+    box-sizing: border-box;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    border-style: solid;
+    border-radius: 0 20px 0 20px;
+    transition: box-shadow 0.3s ease;
+
+  }
+  img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    
+  }
+
+
+}
+
+.article {
+  grid-area: article;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article2 {
+  grid-area: article2;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article3 {
+  grid-area: article3;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article4 {
+  grid-area: article4;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article5 {
+  grid-area: article5;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article6 {
+  grid-area: article6;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article7 {
+  grid-area: article7;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article8 {
+  grid-area: article8;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article9 {
+  grid-area: article9;
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.article10 {
+  grid-area: article10;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .container-proyectos {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    grid-template-areas:
+      "article"
+      "article2"
+      "article3"
+      "article4"
+      "article5"
+      "article6"
+      "article7"
+      "article8"
+      "article9"
+      "article10";
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .contenedor-tarjetas-proyectos {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .container-proyectos {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+    border-radius: 0;
+
+  }
+
+  .descripciones-proyectos {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  img {
+    max-width: 100%;
+
+  }
+}
+
+

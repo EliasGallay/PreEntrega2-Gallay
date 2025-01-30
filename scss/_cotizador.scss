@@ -1,0 +1,39 @@
+.body-cotizador {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(../img/ideas/portada-2xoren.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+
+    main {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        min-height: 80vh;
+
+        h2 {
+            color: orange;
+                }
+            }
+        }
+
+        .ultima {
+            padding-bottom: 5rem;
+            padding-top: 5rem;
+            width: 20rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .contenido {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-width: 60vw;
+            justify-content: center;
+        }

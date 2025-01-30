@@ -1,0 +1,174 @@
+@import 'header';
+@import 'contacto';
+@import 'acerca-nuestro';
+@import 'servicios';
+@import 'portafolios';
+@import 'cotizador';
+
+a {
+    text-decoration: none;
+}
+
+
+
+.body-index {
+    font-family: 'Roboto', sans-serif;
+
+    main {
+        section {
+            h2 {
+                margin-top: 4rem;
+                margin-bottom: 1rem;
+                font-size: 4rem;
+                color: orange;
+            }
+
+            h1 {
+                width: 100%;
+                position: absolute;
+                top: 90%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: orange;
+            }
+        }
+
+        article {
+            text-align: center;
+            padding-top: 50px;
+            color: orange;
+        }
+
+        .contenedor-tarjetas {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+            padding: 100px;
+            overflow: auto;
+            flex-wrap: wrap;
+
+            .tarjeta {
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3ease;
+                border-style: none;
+            }
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            min-height: 400px;
+            max-height: 800px;
+        }
+
+        .main__img {
+            width: 100%;
+            min-height: 400px;
+            max-height: 800px;
+            flex-wrap: auto;
+            object-fit: cover;
+            overflow-x: hidden;
+        }
+
+        .carousel-imagenes {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10rem;
+            padding-top: 2rem;
+            flex-direction: column;
+            align-items: center;
+
+            h2 {
+                padding-bottom: 3rem;
+            }
+
+            .imagenes {
+                max-width: 80vw;
+                height: 80vh;
+                object-fit: cover;
+
+            }
+
+            .carousel-item {
+                width: 80vw;
+
+            }
+
+            .carousel-inner {
+                width: 80vw;
+            }
+
+            .carousel-caption {
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 10;
+                width: 100%;
+                left: 0%;
+                min-height: 100px;
+
+            }
+        }
+
+    }
+}
+
+
+.tarjeta:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+
+// contenedor de imagmenes de servicios
+.contenedor-imagenes {
+
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    overflow: auto;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 0px;
+
+    p {
+        text-align: center;
+        padding: 10px;
+        border: solid;
+        border-radius: 10px;
+        text-justify: center;
+        width: auto;
+        background-size: 400% 400%;
+        animation: cambiar 10s ease infinite;
+        margin-bottom: 25px;
+
+
+    }
+
+    img {
+        width: 350px;
+        margin: 0;
+        padding: 0;
+        height: 200px;
+        border: solid;
+        border-radius: 10px;
+        filter: brightness(50%);
+        transition: filter 0.3s ease;
+        overflow: auto;
+        margin-bottom: 15vh;
+
+
+    }
+}
+
+.contenedor-imagenes p:hover {
+    border-color: orangered;
+    transition: 1s;
+    color: orangered;
+}
+
+
+
+.contenedor-imagenes img:hover {
+    filter: brightness(100%);
+    transition: 1s;
+}
