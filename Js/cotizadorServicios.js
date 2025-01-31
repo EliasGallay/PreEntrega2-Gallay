@@ -178,10 +178,10 @@ window.addEventListener('load', () => {
 
 document.getElementById('botonLimpiar').addEventListener('click', () => {
     localStorage.removeItem('presupuestos');
-    setTotalOf('total', 0);
-    setTotalOf('finalCad', 0);
-    setTotalOf('finalElectrica', 0);
-    setTotalOf('finalPiping', 0);
-    setTotalOf('finalBasica', 0);
+    setTotalOf('total', );
+    setTotalOf('finalCad', );
+    setTotalOf('finalElectrica', );
+    setTotalOf('finalPiping', );
+    setTotalOf('finalBasica', );
 
 });
