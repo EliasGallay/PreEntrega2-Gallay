@@ -89,7 +89,7 @@ const calculoPresupuestoInstalacionElectrica = (ValHM, ValKW) => {
 
     let final = (auxHonorarioMinimo + resto) * ValHM;
     return final;
-}
+}//ya
 
 const calculoDigitalizacionDePlanos = () => {
     let horasCadista = parseFloat(prompt('se esta realizando calculo de digitalizacion de planos \n' + 'ingrese la cantidad de horas cadista aproximadas'));
@@ -101,7 +101,7 @@ const calculoDigitalizacionDePlanos = () => {
     let presupuestoFinalCadista = (horasCadista * valorHoraCadista);
     return presupuestoFinalCadista;
 
-}
+} //ya
 
 const calculoIngenieriaBasicaDeProyecto = (presuCad, presuObraElectrica) => {
     presuCad = parseFloat(presuCad);
@@ -116,7 +116,7 @@ const calculoIngenieriaBasicaDeProyecto = (presuCad, presuObraElectrica) => {
     let calculoObraCivil = montoDeObraCivil * 0.01;
     let presuIngenieriaBasica = presuCad + presuObraElectrica + calculoObraCivil;
     return presuIngenieriaBasica;
-}
+}//ya
 
 
 const conversorNumeroPesos = (numero) => {
@@ -130,3 +130,22 @@ const conversorNumeroPesos = (numero) => {
 }
 
 
+
+
+
+
+
+
+
+
+
+const calculoPiping = (inputValue) => {
+    const horaCad = Number(document.getElementById('finalCad').textContent);
+    const obraElectrica = Number(document.getElementById('finalCad').textContent);
+    const valorMetroPiping = valorHM * 0.15;
+    const metrosLinealesPiping = inputValue;
+
+    const presupuestoPiping = (obraElectrica + horaCad) + (metrosLinealesPiping * valorMetroPiping);
+
+    setTotalOf('finalPiping', presupuestoPiping);
+}

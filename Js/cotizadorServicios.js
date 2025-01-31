@@ -1,3 +1,4 @@
+
 const montoDeObraHM = [36, 54, 182, 638, 910];
 const honorarioMinimoHM = [2.52, 3.51, 10.92, 35.09, 52.04];
 const valorHM = (350000);
@@ -8,80 +9,73 @@ let total = 0;
 
 const menuOpciones = document.getElementById('menuOpciones');
 
+const input = document.getElementById('inputCotizador')
 
-const mostrarContenido = () => {
-    document.querySelectorAll('.contenido').forEach(div => {
-        div.style.display = 'none';
-    });
+menuOpciones.addEventListener('change', () => {
 
-    const opcionSeleccionada = menuOpciones.value;
+         document.querySelectorAll('.contenido').forEach(div => {
+         div.style.display = 'none';
+     });
+   const opcSelected = document.querySelector(`.contenido#${menuOpciones.value}`)
+   const inputAndButton = document.getElementById('inputAndButton');
+   if (menuOpciones.value) {
+         inputAndButton.style.display = 'block';
+   }
 
-    if (opcionSeleccionada === 'maquinarias') {
-        const contenido = document.getElementById('maquinarias');
-        if (contenido) {
-            contenido.style.display = 'block';
-        }
-    } else {
-        const contenido = document.getElementById(opcionSeleccionada);
-        if (contenido) {
-            contenido.style.display = 'block';
-        }
-    }
+   opcSelected.style.display = 'block';
+   document.getElementById('inputCotizador').value = '';
+
+});
+
+function getData(form) {
+  var formData = new FormData(form);
+
+  for (var pair of formData.entries()) {
+    console.log(pair[0] + ": " + pair[1]);
+  }
+
+  return(Object.fromEntries(formData));
+}
+
+document.getElementById("formularioCotizador").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const { opcionesCotizador, inputCotizador} = getData(e.target) || {};
+  switch (opcionesCotizador) {
+    // case 'maquinarias':
+    //     calculoRelevamientoDeMaquinarias();
+    //     break;
+    case 'electricas':
+        calculoPresupuestoInstalacionElectrica(inputCotizador);
+        break;
+    case 'planos':
+        calculoDigitalizacionDePlanos(inputCotizador);
+        break;
+    case 'piping':
+        calculoPiping(inputCotizador);
+        break;
+    case 'basica':
+        calculoIngenieriaBasicaDeProyecto(inputCotizador);
+        break;
+    default:
+      console.log('No hay opciones');
+  }
+});
+
+
+const calculoDigitalizacionDePlanos = (inputCotizador) => {
+    let valorHoraCadista = valorHM * 0.035;
+    let presupuestoFinalCadista = (inputCotizador * valorHoraCadista);
+    console.log(presupuestoFinalCadista);
+    setTotalOf ( 'finalCad', presupuestoFinalCadista);
 }
 
 
+const setTotalOf = (valueId , total) => {
+    document.getElementById(valueId).textContent = total;
+}
 
-
-// Escuchar cambios en el menú de opciones
-menuOpciones.addEventListener('change', () => {
-    switch (menuOpciones.value) {
-        case 'piping':
-            mostrarContenido();
-            console.log('estamos en piping');
-            break;
-        case 'maquinarias':
-            console.log('estamos en servicios de maquinarias');
-            mostrarContenido();
-            break;
-        case 'electricas':
-            console.log('estamos en electrica');
-            mostrarContenido();
-            break;
-        case 'planos':
-            console.log('estamos en planos');
-            mostrarContenido();
-            break;
-        case 'basica':
-            console.log('estamos en basica');
-            mostrarContenido();
-            break;
-        default:
-            console.log('no hay servicios seleccionados');
-            break;
-    }
-});
-
-
-//aca vamos a ver mucho repeat yourself, pero no se me ocurre otra forma de hacerlo sin usar asincronia
-
-document.getElementById('botonHorasCad').addEventListener('click', () => {
-
-    const horasCadista = parseFloat(document.getElementById('horasCadista').value);
-    let valorHoraCadista = valorHM * 0.035;
-    presupuestoFinalCadista = (horasCadista * valorHoraCadista);
-    document.getElementById('resultadoCad').textContent = 'El presupuesto de digitalización de planos es de ' + conversorNumeroPesos(presupuestoFinalCadista);
-    obtenerResultadoFinalCad();
-});
-
-
-const obtenerResultadoFinalCad =() => {
-    document.getElementById('finalCad').textContent = 'El presupuesto de Digitalizacion de Planos es de ' + conversorNumeroPesos(presupuestoFinalCadista);
-    actualizartotal(presupuestoFinalCadista);
-    return presupuestoFinalCadista;
-};
-
-document.getElementById('botonElectricas').addEventListener('click', () => {
-    const potenciaInstalada = parseFloat(document.getElementById('potenciaInstalada').value);
+const calculoPresupuestoInstalacionElectrica = (inputCotizador) => {
+    let potenciaInstalada = inputCotizador;
 
     let valorInstalacionElectrica = potenciaInstalada * valorKW;
     let valorDeInstalacionElectricaHM = valorInstalacionElectrica / valorHM;
@@ -99,85 +93,43 @@ document.getElementById('botonElectricas').addEventListener('click', () => {
         auxHonorarioMinimo += honorarioMinimoHM[i];
     }
 
-    presupuestoFinalInstalacionesElectricas = (auxHonorarioMinimo + resto) * valorHM;
-
-
-    document.getElementById('resultadoElectrica').textContent = 'El presupuesto de instalaciones eléctricas es de ' + conversorNumeroPesos(presupuestoFinalInstalacionesElectricas);
-    obtenerResultadoFinalElectricas();
-});
-
-
-const conversorNumeroPesos = (numero) => {
-    let conversion = new Intl.NumberFormat('es-AR', {
-        style: 'currency',
-        currency: 'ARS',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(numero);
-    return conversion;
-};
-
-
-const obtenerResultadoFinalElectricas =() => {
-    document.getElementById('finalElectrica').textContent = 'El presupuesto de instalaciones electricas es de ' + conversorNumeroPesos(presupuestoFinalInstalacionesElectricas);
-    actualizartotal(presupuestoFinalInstalacionesElectricas);
-    return presupuestoFinalInstalacionesElectricas;
-};
-
-
-
-
-const actualizartotal = (valor)=>{
-    total = valor + total;
-    document.getElementById('total').textContent = 'El total de los servicios es de ' + conversorNumeroPesos(total);
+    let final = (auxHonorarioMinimo + resto) * valorHM;
+    setTotalOf('finalElectrica', final);
 }
 
 
-// Vamos a usar localStorage para guardar los presupuestos
 
-const guardarPresupuestos = () => {
-    const presupuestos = {
-        cadista: presupuestoFinalCadista,
-        electricas: presupuestoFinalInstalacionesElectricas,
-        total: total
-    };
-    localStorage.setItem('presupuestos', JSON.stringify(presupuestos));
-};
+const calculoIngenieriaBasicaDeProyecto = (inputValue) => {
+    const  presuCad = Number(document.getElementById('finalCad').textContent);
+    const presuObraElectrica = Number(document.getElementById('finalElectrica').textContent);
+    if ( (presuCad || presuObraElectrica) <= 0){
+        // alert('se debe calcular primero presupuesto cad y presupuesto obra electrica')
+        Swal.fire({
+            title: 'Error!',
+            text: 'se debe calcular primero presupuesto Digitalizacion de planos y presupuesto obra electrica',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        return
+    }else{
+        let montoDeObraCivil = inputValue;
 
-
-const cargarPresupuestos = () => {
-    const presupuestos = JSON.parse(localStorage.getItem('presupuestos'));
-    if (presupuestos) {
-        presupuestoFinalCadista = presupuestos.cadista;
-        presupuestoFinalInstalacionesElectricas = presupuestos.electricas;
-        total = presupuestos.total;
-
-        document.getElementById('finalCad').textContent = 'El presupuesto de Digitalizacion de Planos es de ' + conversorNumeroPesos(presupuestoFinalCadista);
-        document.getElementById('finalElectrica').textContent = 'El presupuesto de instalaciones electricas es de ' + conversorNumeroPesos(presupuestoFinalInstalacionesElectricas);
-        document.getElementById('total').textContent = 'El total de los servicios es de ' + conversorNumeroPesos(total);
+        let calculoObraCivil = montoDeObraCivil * 0.01;
+        let presuIngenieriaBasica = presuCad + presuObraElectrica + calculoObraCivil;
+        setTotalOf( 'finalBasica' , presuIngenieriaBasica);
+        }
     }
-};
-
-document.getElementById('botonHorasCad').addEventListener('click', () => {
-    guardarPresupuestos();
-});
-
-document.getElementById('botonElectricas').addEventListener('click', () => {
-    guardarPresupuestos();
-});
 
 
-window.addEventListener('load', () => {
-    cargarPresupuestos();
-});
 
-document.getElementById('botonLimpiar').addEventListener('click', () => {
-    localStorage.removeItem('presupuestos');
-    presupuestoFinalCadista = 0;
-    presupuestoFinalInstalacionesElectricas = 0;
-    total = 0;
 
-    document.getElementById('finalCad').textContent = 'El presupuesto de Digitalizacion de Planos es de ' + conversorNumeroPesos(presupuestoFinalCadista);
-    document.getElementById('finalElectrica').textContent = 'El presupuesto de instalaciones electricas es de ' + conversorNumeroPesos(presupuestoFinalInstalacionesElectricas);
-    document.getElementById('total').textContent = 'El total de los servicios es de ' + conversorNumeroPesos(total);
-});
+const calculoPiping = (inputValue) => {
+    const horaCad = Number(document.getElementById('finalCad').textContent);
+    const obraElectrica = Number(document.getElementById('finalCad').textContent);
+    const valorMetroPiping = valorHM * 0.15;
+    const metrosLinealesPiping = inputValue;
+    const presupuestoPiping = (obraElectrica + horaCad) + (metrosLinealesPiping * valorMetroPiping);
+
+    setTotalOf('finalPiping', presupuestoPiping);
+}
+

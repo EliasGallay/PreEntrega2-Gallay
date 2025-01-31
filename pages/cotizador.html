@@ -8,6 +8,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" type="image/png" href="../img/favicon/favicon-thv.png" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Contáctanos | THV Servicios de Ingeniería</title>
         <meta name="description" content="¿Necesitas ayuda con tu proyecto de ingeniería? Ponte en contacto con THV. Nuestro equipo está listo para ofrecerte soluciones técnicas adaptadas a tus necesidades.">
         <meta name="keywords" content="contacto THV, contacto ingeniería, asesoría en ingeniería, soluciones técnicas, contacto Rosario, THV Ingeniería">
@@ -19,59 +20,62 @@
     <main>
         <section class="container mt-5">
             <h1>Seleccione una opción</h1>
-            <select class="form-select" id="menuOpciones" aria-label="Default select example">
-                <option selected>Seleccione una opcion</option>
-                <option value="piping">Calcular Piping</option>
-                <option value="maquinarias">Calcular Relevamiento de Maquinarias</option>
-                <option value="electricas">Calcular Instalaciones Eléctricas</option>
-                <option value="planos">Calcular Digitalización de Planos</option>
-                <option value="basica">Calcular Ingeniería Básica de Proyecto</option>
-            </select>
 
-            <div id="piping" class="contenido">
-                <h2>Piping</h2>
-                <p>necesito: instalaciones electricas, calculo de planos</p>
+            <div class="">
+                <form id="formularioCotizador">
+                    <select class="form-select" name="opcionesCotizador"  id="menuOpciones" aria-label="Default select example">
+                        <option selected>Seleccione una opcion</option>
+                        <option value="piping">Calcular Piping</option>
+                        <!-- <option value="maquinarias">Calcular Relevamiento de Maquinarias</option> -->
+                        <option value="electricas">Calcular Instalaciones Eléctricas</option>
+                        <option value="planos">Calcular Digitalización de Planos</option>
+                        <option value="basica">Calcular Ingeniería Básica de Proyecto</option>
+                    </select>
+                    <div id="piping" class="contenido">
+                        <h2>Piping</h2>
+                        <p>necesito: instalaciones electricas, calculo de planos</p>
+                    </div>
+
+                    <div id="maquinarias" class="contenido">
+                        <h2>Relevamiento de Maquinarias</h2>
+                        <p>Aquí puedes calcular los datos relacionados con las maquinarias.</p>
+                    </div>
+
+                    <div id="electricas" class="contenido">
+                        <h2>Instalaciones Eléctricas</h2>
+                        <p>Información y herramientas para calcular instalaciones eléctricas.</p>
+                        <div id="datosElectrica">
+                            <span id="resultadoElectrica"></span>
+                        </div>
+                    </div>
+
+                    <div id="basica" class="contenido">
+                        <h2>Ingeniería Básica de Proyecto</h2>
+                        <p>Detalles y cálculos para proyectos de ingeniería básica.</p>
+                    </div>
+
+                    <div id="planos" class="contenido">
+                        <h2>Digitalización de Planos</h2>
+                        <p>Calcula el costo de digitalizar planos.</p>
+                    </div>
+                    <div class="contenido" id ="inputAndButton">
+                        <input type="number" id="inputCotizador" name="inputCotizador"  placeholder="ingrese monto">
+                        <button type="submit" id="botonInput">Enviar</button>
+                    </div>
+                </form>
             </div>
 
-            <div id="maquinarias" class="contenido">
-                <h2>Relevamiento de Maquinarias</h2>
-                <p>Aquí puedes calcular los datos relacionados con las maquinarias.</p>
-            </div>
 
-            <div id="electricas" class="contenido">
-                <h2>Instalaciones Eléctricas</h2>
-                <p>Información y herramientas para calcular instalaciones eléctricas.</p>
-                <div id="datosElectrica">
-                    <input type="number" id="potenciaInstalada" placeholder="Potencia Instalada">
-                    <button id="botonElectricas" type="submit">enviar</button>
-                    <span id="resultadoElectrica"></span>
-                </div>
-            </div>
-
-            <div id="planos" class="contenido">
-                <h2>Digitalización de Planos</h2>
-                <div id="datosCad">
-                    <label for="HorasCadista">ingrese la cantidad de horas cadista aproximadas</label>
-                    <input type="number" id="horasCadista" placeholder="Ingrese las horas cadista aproximadas">
-                    <button id="botonHorasCad" type="submit">enviar</button>
-                    <span id="resultadoCad"></span>
-                </div>
-            </div>
-
-            <div id="basica" class="contenido">
-                <h2>Ingeniería Básica de Proyecto</h2>
-                <p>Detalles y cálculos para proyectos de ingeniería básica.</p>
-            </div>
 
         </section>
         <section>
             <div class="d-flex flex-column">
                 <h2>tu presupuesto actual es de:</h2>
-                <span id="finalPiping">Piping:</span>
-                <span>Maquinarias:</span>
-                <span id="finalElectrica">Instalaciones electricas: $0</span>
-                <span id ='finalCad'>Planos:</span>
-                <span>Ingenieria Basica:</span>
+                <span>Piping: <span id="finalPiping"></span> <br>
+                <!-- <span>Maquinarias:</span> -->
+                <span>Electrica: <span id="finalElectrica"></span> <br>
+                <span>Planos: <span id="finalCad"></span> <br>
+                <span>Ingenieria Basica: <span id="finalBasica"></span> <br>
                 <span id="total"><h4>Total:</h4></span>
                 <button id="botonLimpiar" type="submit">limpiar</button>
                 <span></span>
@@ -84,7 +88,9 @@
     crossorigin="anonymous"></script>
     <div id="footer-container"></div>
     <script src="../Js/header.js"></script>
-    <script src="../Js/cotizadorServicios.js"></script>
+    <script type="module" src="../Js/cotizadorServicios.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- asd -->
 </body>
 </html>

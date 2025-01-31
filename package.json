@@ -2,10 +2,15 @@
   "name": "preentrega2gallay-main",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "sweetalert2": "^11.6.13",
+    "toastify-js": "^1.12.0"
+  }
 }
