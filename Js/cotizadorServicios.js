@@ -66,6 +66,7 @@ const calculoDigitalizacionDePlanos = (inputCotizador) => {
     let valorHoraCadista = valorHM * 0.035;
     let presupuestoFinalCadista = (inputCotizador * valorHoraCadista);
     console.log(presupuestoFinalCadista);
+    actualizartotal(presupuestoFinalCadista)
     setTotalOf ( 'finalCad', presupuestoFinalCadista);
 }
 
@@ -94,6 +95,7 @@ const calculoPresupuestoInstalacionElectrica = (inputCotizador) => {
     }
 
     let final = (auxHonorarioMinimo + resto) * valorHM;
+    actualizartotal(final)
     setTotalOf('finalElectrica', final);
 }
 
@@ -108,7 +110,7 @@ const calculoIngenieriaBasicaDeProyecto = (inputValue) => {
             title: 'Error!',
             text: 'se debe calcular primero presupuesto Digitalizacion de planos y presupuesto obra electrica',
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Ok!'
           })
         return
     }else{
@@ -116,6 +118,7 @@ const calculoIngenieriaBasicaDeProyecto = (inputValue) => {
 
         let calculoObraCivil = montoDeObraCivil * 0.01;
         let presuIngenieriaBasica = presuCad + presuObraElectrica + calculoObraCivil;
+        actualizartotal(presuIngenieriaBasica)
         setTotalOf( 'finalBasica' , presuIngenieriaBasica);
         }
     }
@@ -125,11 +128,16 @@ const calculoIngenieriaBasicaDeProyecto = (inputValue) => {
 
 const calculoPiping = (inputValue) => {
     const horaCad = Number(document.getElementById('finalCad').textContent);
-    const obraElectrica = Number(document.getElementById('finalCad').textContent);
+    const obraElectrica = Number(document.getElementById('finalElectrica').textContent);
     const valorMetroPiping = valorHM * 0.15;
     const metrosLinealesPiping = inputValue;
     const presupuestoPiping = (obraElectrica + horaCad) + (metrosLinealesPiping * valorMetroPiping);
-
+    actualizartotal(valorMetroPiping)
     setTotalOf('finalPiping', presupuestoPiping);
 }
 
+
+const actualizartotal = (valor)=>{
+    total = valor + total;
+    setTotalOf('total', total)
+}
