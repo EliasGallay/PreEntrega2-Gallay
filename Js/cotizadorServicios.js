@@ -59,6 +59,7 @@ document.getElementById("formularioCotizador").addEventListener("submit", functi
     default:
       console.log('No hay opciones');
   }
+  guardarPresupuestos();
 });
 
 
@@ -141,3 +142,46 @@ const actualizartotal = (valor)=>{
     total = valor + total;
     setTotalOf('total', total)
 }
+
+
+
+
+
+const guardarPresupuestos = () => {
+    const presupuestos = {
+        cadista: Number(document.getElementById('finalCad').textContent),
+        electricas: Number(document.getElementById('finalElectrica').textContent),
+        piping: Number(document.getElementById('finalPiping').textContent),
+        basica: Number(document.getElementById('finalBasica').textContent),
+        total: Number(document.getElementById('total').textContent),
+    };
+    localStorage.setItem('presupuestos', JSON.stringify(presupuestos));
+    console.log(presupuestos)
+};
+
+
+const cargarPresupuestos = () => {
+    const presupuestos = JSON.parse(localStorage.getItem('presupuestos'));
+
+        setTotalOf('total', presupuestos.total);
+        setTotalOf('finalCad', presupuestos.cadista);
+        setTotalOf('finalElectrica', presupuestos.electricas);
+        setTotalOf('finalPiping', presupuestos.piping);
+        setTotalOf('finalBasica', presupuestos.basica);
+};
+
+
+
+window.addEventListener('load', () => {
+    cargarPresupuestos();
+});
+
+document.getElementById('botonLimpiar').addEventListener('click', () => {
+    localStorage.removeItem('presupuestos');
+    setTotalOf('total', 0);
+    setTotalOf('finalCad', 0);
+    setTotalOf('finalElectrica', 0);
+    setTotalOf('finalPiping', 0);
+    setTotalOf('finalBasica', 0);
+
+});
